@@ -1,31 +1,165 @@
 <!doctype html>
 <html lang="ru">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Привет, мир!</title>
-    <style>
-      :root {
-        color-scheme: light dark;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      }
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>НЕ ЗЕМЛЯ — десять мест, которые не похожи на Землю</title>
+<meta name="description" content="Десять мест, снятых на этой планете. Маршрут длиной 82 786 км — два экватора, не покидая Земли.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
 
-      body {
-        min-height: 100vh;
-        margin: 0;
-        display: grid;
-        place-items: center;
-      }
+<main>
+  <!-- Числа этапов и накопленного — из tools/route.py. Счётчик читает data-total. -->
+  <div class="dive">
+    <div class="stage">
 
-      h1 {
-        margin: 0;
-        font-size: clamp(2.5rem, 8vw, 5rem);
-        font-weight: 700;
-        letter-spacing: 0;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>Привет, мир!</h1>
-  </body>
+      <header class="hero" style="--accent: #B33A20" data-total="0">
+        <img class="frame" src="assets/img/socotra.jpg" alt="" width="1800" height="1200" fetchpriority="high">
+        <div class="body">
+          <h1>Какая это планета?</h1>
+          <a class="jump" href="#finale">Сразу к ответу</a>
+        </div>
+      </header>
+
+      <section class="place" id="p-socotra" style="--accent: #B33A20" data-total="0">
+        <img class="frame" src="assets/img/socotra.jpg" alt="Драконовы деревья с плоскими кронами на каменистом плато Сокотры" width="1800" height="1200" loading="lazy" decoding="async">
+        <div class="body">
+          <p class="meta"><span class="n">Точка 1 / 10</span><span class="coords">12°30′N 54°00′E</span></p>
+          <h2>Сокотра</h2>
+          <p class="where">Йемен · старт маршрута</p>
+          <p class="text">Остров оторвался от материка так давно, что жизнь здесь пошла отдельной веткой. Драконовы деревья держат крону плоским зонтом: так они ловят туман, а дождя тут почти не бывает. На срезе кора истекает красной смолой — её тысячи лет называют кровью дракона.</p>
+          <p class="fact">307 из 825 видов растений не растут больше нигде</p>
+        </div>
+      </section>
+
+      <section class="place" id="p-dallol" style="--accent: #E8D33A" data-total="1494">
+        <img class="frame" src="assets/img/dallol.jpg" alt="Кислотные соляные поля Даллола: жёлтые, оранжевые и зелёные террасы" width="1800" height="1200" loading="lazy" decoding="async">
+        <div class="body">
+          <p class="meta"><span class="n">Точка 2 / 10</span><span class="coords">14°14′N 40°18′E</span></p>
+          <h2>Данакиль</h2>
+          <p class="where">Эфиопия · этап 1 494 км</p>
+          <p class="text">Под впадиной стоит магма и выдавливает наверх рассолы, насыщенные железом и серой. Цвет здесь означает химию: жёлтый — сера, оранжевый — окисленное железо, зелёный — медь. Дождя не бывает, и рисунок держится годами, пока его не перепишет новый источник.</p>
+          <p class="fact">кислотность рассолов доходит до pH −1,7</p>
+        </div>
+      </section>
+
+      <section class="place" id="p-uyuni" style="--accent: #DCE9EE" data-total="13865">
+        <img class="frame" src="assets/img/uyuni.jpg" alt="Гора Тунупа и небо, отражённые в зеркале воды на солончаке Уюни" width="1800" height="1200" loading="lazy" decoding="async">
+        <div class="body">
+          <p class="meta"><span class="n">Точка 3 / 10</span><span class="coords">20°08′S 67°29′W</span></p>
+          <h2>Уюни</h2>
+          <p class="where">Боливия · этап 12 371 км</p>
+          <p class="text">Соляная корка легла так ровно, что по ней калибруют спутниковые высотомеры. В дождь на ней стоит слой воды в пару сантиметров, и равнина становится зеркалом без единого шва. Горизонт пропадает: небо оказывается и сверху, и снизу, а гора вырастает из собственного отражения.</p>
+          <p class="fact">на 10 000 км² перепад высот меньше метра</p>
+        </div>
+      </section>
+
+      <section class="place" id="p-danxia" style="--accent: #E8A33D" data-total="31478">
+        <img class="frame" src="assets/img/danxia.jpg" alt="Слоистые холмы Чжанъе Данься в полосах ржавчины, охры и мела" width="1800" height="1200" loading="lazy" decoding="async">
+        <div class="body">
+          <p class="meta"><span class="n">Точка 4 / 10</span><span class="coords">38°55′N 100°08′E</span></p>
+          <h2>Данься</h2>
+          <p class="where">Китай · этап 17 613 км</p>
+          <p class="text">Песчаник и минералы копились слоями на дне древнего озера, а потом плиты подняли эту стопку и наклонили набок. Ветер и вода срезали верх, и разрез вышел наружу: полосы ржавчины, охры и мела идут поперёк склонов. Красит их не свет и не лишайник — это цвет самой породы.</p>
+          <p class="fact">пласты копились около 24 млн лет</p>
+        </div>
+      </section>
+
+      <section class="place" id="p-ijen" style="--accent: #5B3DFF" data-total="36900">
+        <img class="frame" src="assets/img/ijen.jpg" alt="Синее пламя горящей серы в темноте кратера Кавах-Иджен" width="1800" height="1200" loading="lazy" decoding="async">
+        <div class="body">
+          <p class="meta"><span class="n">Точка 5 / 10</span><span class="coords">8°03′S 114°15′E</span></p>
+          <h2>Иджен</h2>
+          <p class="where">Индонезия · этап 5 422 км</p>
+          <p class="text">Из трещин кратера бьёт вулканический газ температурой под 600 °C. На воздухе он загорается и горит синим, потому что горит сера, а не дерево. Днём пламени не видно совсем — оно проступает только в темноте, и сборщики серы работают прямо в нём.</p>
+          <p class="fact">озеро в кратере — pH 0,5, кислее желудочного сока</p>
+        </div>
+      </section>
+
+      <section class="place" id="p-cappadocia" style="--accent: #E0A08A" data-total="46559">
+        <img class="frame" src="assets/img/cappadocia.jpg" alt="Плотный лес туфовых башен Каппадокии в утреннем свете" width="1800" height="1200" loading="lazy" decoding="async">
+        <div class="body">
+          <p class="meta"><span class="n">Точка 6 / 10</span><span class="coords">38°38′N 34°50′E</span></p>
+          <h2>Каппадокия</h2>
+          <p class="where">Турция · этап 9 659 км</p>
+          <p class="text">Вулканы засыпали долину пеплом, пепел слежался в туф — камень, который режется ножом. Дождь и ветер выели мягкое и оставили стоять твёрдое: сотни башен с каменными шапками. Тот же податливый туф позволил выкопать город прямо под ними — Деринкую уходит на восемь ярусов вниз.</p>
+          <p class="fact">под ними город Деринкую уходит на 85 м вниз</p>
+        </div>
+      </section>
+
+      <section class="place" id="p-vatnajokull" style="--accent: #1E5FA8" data-total="50942">
+        <img class="frame" src="assets/img/vatnajokull.jpg" alt="Свод ледниковой пещеры из спрессованного синего льда" width="1800" height="1200" loading="lazy" decoding="async">
+        <div class="body">
+          <p class="meta"><span class="n">Точка 7 / 10</span><span class="coords">64°25′N 16°48′W</span></p>
+          <h2>Ватнайёкюдль</h2>
+          <p class="where">Исландия · этап 4 383 км</p>
+          <p class="text">Лёд лежит слоями почти километровой толщины и под собственным весом выдавливает из себя воздух. Без пузырьков он перестаёт рассеивать свет и пропускает только синюю часть спектра — остальное гаснет в толще. Пещеру каждую зиму протапливает талая вода, и каждое лето своды обрушиваются: одну и ту же не увидеть дважды.</p>
+          <p class="fact">толщина льда доходит до 950 м</p>
+        </div>
+      </section>
+
+      <section class="place" id="p-tsingy" style="--accent: #A8B4B0" data-total="61553">
+        <img class="frame" src="assets/img/tsingy.jpg" alt="Частокол известняковых игл Цинги-де-Бемараха" width="1800" height="1200" loading="lazy" decoding="async">
+        <div class="body">
+          <p class="meta"><span class="n">Точка 8 / 10</span><span class="coords">18°43′S 44°45′E</span></p>
+          <h2>Цинги</h2>
+          <p class="where">Мадагаскар · этап 10 611 км</p>
+          <p class="text">Дожди тысячелетиями растворяли известняк сверху вниз, вдоль трещин. Осталось то, к чему вода не добралась: частокол лезвий высотой до ста метров, между которыми не пройти. По-малагасийски «цинги» и значит место, где нельзя ходить босиком.</p>
+          <p class="fact">иглы поднимаются на 100 м</p>
+        </div>
+      </section>
+
+      <section class="place" id="p-marmol" style="--accent: #2AA9A0" data-total="71979">
+        <img class="frame" src="assets/img/marmol.jpg" alt="Мраморные своды над бирюзовой водой ледникового озера" width="1800" height="1200" loading="lazy" decoding="async">
+        <div class="body">
+          <p class="meta"><span class="n">Точка 9 / 10</span><span class="coords">46°39′S 72°38′W</span></p>
+          <h2>Мраморные пещеры</h2>
+          <p class="where">Чили · этап 10 426 км</p>
+          <p class="text">Волны ледникового озера шесть тысяч лет вылизывают мраморный мыс и вымыли в нём своды и колонны. Вода бирюзовая не от неба: ледники стирают с гор каменную муку, и эта взвесь рассеивает свет. Отражённый от воды, он поднимается на потолок, и слои мрамора начинают светиться изнутри.</p>
+          <p class="fact">вода точит этот мрамор больше 6 000 лет</p>
+        </div>
+      </section>
+
+      <section class="place" id="p-prismatic" style="--accent: #FF5A1F" data-total="82786">
+        <img class="frame" src="assets/img/prismatic.jpg" alt="Гранд-Призматик сверху: рыжие кольца вокруг голубой линзы кипятка" width="1800" height="1200" loading="lazy" decoding="async">
+        <div class="body">
+          <p class="meta"><span class="n">Точка 10 / 10</span><span class="coords">44°31′N 110°50′W</span></p>
+          <h2>Гранд-Призматик</h2>
+          <p class="where">США · этап 10 807 км</p>
+          <p class="text">В середине источника вода около 70 °C и почти стерильна — она синяя просто потому, что глубокая и чистая. К краям температура падает, и на каждом поясе селится своя колония бактерий: сначала жёлтые, за ними оранжевые, потом рыжие. Кольца — это не минерал, а живое, разложенное по градусам.</p>
+          <p class="fact">цвет источнику дают живые бактерии при 70 °C</p>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <p class="odometer" aria-hidden="true">Пройдено <span id="odometer-value">0</span> км</p>
+
+  <footer class="finale" id="finale" tabindex="-1">
+    <h2>Ни один снимок не сделан за пределами Земли.</h2>
+    <p class="verdict">82 786 км · два экватора · одна планета</p>
+
+    <img class="route" src="assets/route.svg" alt="Карта мира: десять точек маршрута соединены дугами большого круга — от Сокотры через Данакиль, Уюни, Данься, Иджен, Каппадокию, Ватнайёкюдль, Цинги и Мраморные пещеры к Гранд-Призматику." width="2000" height="789">
+
+    <ul class="proof">
+      <li><img src="assets/img/socotra.jpg" alt="" width="1800" height="1200" loading="lazy"><span>Сокотра</span><a href="https://commons.wikimedia.org/wiki/File:Dragon%27s_Blood_Trees,_Socotra_Island.jpg">Rod Waddington · CC BY-SA 2.0</a></li>
+      <li><img src="assets/img/dallol.jpg" alt="" width="1800" height="1200" loading="lazy"><span>Даллол</span><a href="https://commons.wikimedia.org/wiki/File:Dallol-2001.jpg">Hervé Sthioul · CC BY 2.5</a></li>
+      <li><img src="assets/img/uyuni.jpg" alt="" width="1800" height="1200" loading="lazy"><span>Уюни</span><a href="https://commons.wikimedia.org/wiki/File:Salar_de_Uyuni,_Bolivia,_2016-02-04,_DD_10-12_HDR.JPG">Diego Delso · CC BY-SA 4.0</a></li>
+      <li><img src="assets/img/danxia.jpg" alt="" width="1800" height="1200" loading="lazy"><span>Данься</span><a href="https://commons.wikimedia.org/wiki/File:Colourful_mountains_of_the_Zhangye_National_Geopark.jpg">Terry Wu · CC BY-SA 2.0</a></li>
+      <li><img src="assets/img/ijen.jpg" alt="" width="1800" height="1200" loading="lazy"><span>Иджен</span><a href="https://commons.wikimedia.org/wiki/File:Blue_flames_in_the_Ijen_Caldera.jpg">Isderion · CC BY-SA 3.0 de</a></li>
+      <li><img src="assets/img/cappadocia.jpg" alt="" width="1800" height="1200" loading="lazy"><span>Каппадокия</span><a href="https://commons.wikimedia.org/wiki/File:Nature_carved_rock_Cappadocia_01.jpg">Linda M Caldwell · CC BY-SA 4.0</a></li>
+      <li><img src="assets/img/vatnajokull.jpg" alt="" width="1800" height="1200" loading="lazy"><span>Ватнайёкюдль</span><a href="https://commons.wikimedia.org/wiki/File:Ice_Cave_Blue_Roof_-_Iceland.jpg">Eric Kilby · CC BY-SA 2.0</a></li>
+      <li><img src="assets/img/tsingy.jpg" alt="" width="1800" height="1200" loading="lazy"><span>Цинги</span><a href="https://commons.wikimedia.org/wiki/File:Tsingy_-_105.jpg">Olivier Lejade · CC BY-SA 2.0</a></li>
+      <li><img src="assets/img/marmol.jpg" alt="" width="1800" height="1200" loading="lazy"><span>Мраморные пещеры</span><a href="https://commons.wikimedia.org/wiki/File:Cuevas_de_M%C3%A1rmol_-_Marble_Caves,_Blue_Water,_Patagonia,_Chile.jpg">Wescottm · CC BY 4.0</a></li>
+      <li><img src="assets/img/prismatic.jpg" alt="" width="1800" height="1200" loading="lazy"><span>Гранд-Призматик</span><a href="https://commons.wikimedia.org/wiki/File:Aerial_image_of_Grand_Prismatic_Spring_(view_from_the_south).jpg">Carsten Steger · CC BY-SA 4.0</a></li>
+    </ul>
+
+    <p class="colophon">Снимки — Wikimedia Commons, свободные лицензии. Расстояния — по большому кругу, R = 6371 км.</p>
+  </footer>
+</main>
+
+<script src="main.js" defer></script>
+</body>
 </html>
