@@ -1,0 +1,261 @@
+/* RAYDIZHE / NIGHT — «Октябрь, сквозь стекло»
+ *
+ * Ночной близнец бумажной версии: страница — фильм. Сцены-кадры с настоящей
+ * фотографией, титры проявляются из темноты, по стеклу героя идёт дождь.
+ * Один цветной акцент — янтарь фонаря на чернильной ночи.
+ */
+
+@font-face {
+  font-family: "EB Garamond"; font-style: normal; font-weight: 400; font-display: swap;
+  src: url(../assets/fonts/garamond-400.woff2) format("woff2");
+}
+@font-face {
+  font-family: "EB Garamond"; font-style: italic; font-weight: 400; font-display: swap;
+  src: url(../assets/fonts/garamond-400i.woff2) format("woff2");
+}
+@font-face {
+  font-family: "Instrument Serif"; font-style: normal; font-weight: 400; font-display: swap;
+  src: url(../assets/fonts/instrument-400.woff2) format("woff2");
+}
+@font-face {
+  font-family: "Instrument Serif"; font-style: italic; font-weight: 400; font-display: swap;
+  src: url(../assets/fonts/instrument-400i.woff2) format("woff2");
+}
+@font-face {
+  font-family: "JetBrains Mono"; font-style: normal; font-weight: 400; font-display: swap;
+  src: url(../assets/fonts/jetbrains-400.woff2) format("woff2");
+}
+
+:root {
+  --night: #10141c;
+  --mist: #232936;
+  --bone: #e8e6e1;
+  --lamp: #d9984a;   /* янтарь фонаря сквозь мокрое стекло */
+
+  --body: clamp(1.1rem, 1rem + 0.5vw, 1.35rem);
+  --title: clamp(2rem, 1.2rem + 4.2vw, 4.6rem);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--night);
+  color: var(--bone);
+  font-family: "EB Garamond", Georgia, serif;
+  font-size: var(--body);
+  line-height: 1.6;
+}
+
+:focus-visible { outline: 2px solid var(--lamp); outline-offset: 4px; }
+
+.skip {
+  position: absolute; left: -200vw; top: 0;
+  padding: 0.5rem 1rem; background: var(--lamp); color: var(--night); z-index: 10;
+}
+.skip:focus-visible { left: 1rem; top: 1rem; }
+
+/* ── Сцена: кадр с фотографией и титрами ────────────────────────────────── */
+.scene {
+  position: relative;
+  min-height: 100svh;
+  display: grid;
+  align-items: end;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.still {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Ночной грейд: все кадры — из одного фильма, даже дневной вереск */
+  filter: brightness(0.62) saturate(0.82) contrast(1.06);
+}
+
+/* Медленный дрейф кадра — камера дышит. Гаснет при reduced-motion. */
+@media (prefers-reduced-motion: no-preference) {
+  .still { animation: drift 26s ease-in-out infinite alternate; }
+  @keyframes drift {
+    from { transform: scale(1); }
+    to   { transform: scale(1.06) translateY(-1.2%); }
+  }
+}
+
+/* Виньетка + тьма к нижней трети, где живут титры */
+.scene::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    radial-gradient(ellipse 130% 90% at 50% 30%, transparent 40%, rgb(16 20 28 / 0.55) 100%),
+    linear-gradient(to top, rgb(16 20 28 / 0.94) 0%, rgb(16 20 28 / 0.55) 30%, transparent 62%);
+  pointer-events: none;
+}
+
+.frame-inner {
+  position: relative;
+  z-index: 2;
+  width: min(100% - 3rem, 62rem);
+  margin-inline: auto;
+  padding-block: clamp(3.5rem, 10vh, 7rem);
+}
+
+/* ── Дождь на стекле героя: два слоя потёков с разной скоростью ─────────── */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: -20% 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(100deg, transparent 0 46px, rgb(232 230 225 / 0.05) 46px 47px, transparent 47px 90px),
+    repeating-linear-gradient(96deg, transparent 0 23px, rgb(232 230 225 / 0.08) 23px 24px, transparent 24px 61px);
+  opacity: 0.9;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero::after { animation: streaks 1.9s linear infinite; }
+  @keyframes streaks {
+    from { transform: translateY(-4.5%); }
+    to   { transform: translateY(4.5%); }
+  }
+}
+
+/* ── Типографика титров ─────────────────────────────────────────────────── */
+.slate {
+  margin: 0 0 1.4rem;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--lamp);
+}
+
+h1 {
+  margin: 0;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-weight: 400;
+  font-size: var(--title);
+  line-height: 1.08;
+  text-wrap: balance;
+  max-width: 18ch;
+}
+
+.dateline {
+  margin: 1.6rem 0 0;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--bone) 62%, transparent);
+}
+
+.lines { max-width: 44rem; }
+.lines p, .lines blockquote { margin: 0 0 1em; }
+
+.lines blockquote p {
+  font-style: italic;
+  font-size: clamp(1.4rem, 1.1rem + 1.6vw, 2.2rem);
+  line-height: 1.3;
+}
+.lines blockquote footer {
+  font-size: 0.95rem;
+  color: color-mix(in srgb, var(--bone) 62%, transparent);
+}
+
+.spoken {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-style: italic;
+  font-size: clamp(1.7rem, 1.3rem + 2vw, 2.6rem);
+  color: var(--lamp);
+}
+
+/* ── Проявление титров из темноты (класс ставит night.js) ───────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  .js .reveal {
+    opacity: 0;
+    transform: translateY(1.1rem);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+  .js .reveal.lit {
+    opacity: 1;
+    transform: none;
+  }
+  /* Строки одной сцены идут волной */
+  .js .reveal.lit:nth-child(2) { transition-delay: 0.12s; }
+  .js .reveal.lit:nth-child(3) { transition-delay: 0.24s; }
+  .js .reveal.lit:nth-child(4) { transition-delay: 0.36s; }
+}
+
+/* ── Чёрные кадры ───────────────────────────────────────────────────────── */
+.black { background: #0b0e14; align-items: center; }
+.black .frame-inner { text-align: center; }
+
+.stay {
+  margin: 0;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-style: italic;
+  font-size: clamp(3.4rem, 2.4rem + 6vw, 7rem);
+  color: var(--lamp);
+}
+
+/* ── Финал ──────────────────────────────────────────────────────────────── */
+.credits-scene { min-height: 88svh; }
+
+.read-inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+}
+
+.cover {
+  width: clamp(7.5rem, 15vw, 10.5rem);
+  height: auto;
+  transform: rotate(-2deg);
+  box-shadow: 0 6px 30px rgb(0 0 0 / 0.5);
+}
+
+.read-body { max-width: 34rem; }
+
+.facts {
+  margin: 0 0 1.6rem;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  color: color-mix(in srgb, var(--bone) 62%, transparent);
+}
+
+.cta {
+  display: inline-block;
+  padding: 0.9em 2em;
+  border: 1.5px solid var(--lamp);
+  border-radius: 2px;
+  font-size: 1.15rem;
+  color: var(--lamp);
+  text-decoration: none;
+}
+.cta:hover { background: var(--lamp); color: var(--night); }
+
+.free { margin: 1.4rem 0 0; color: color-mix(in srgb, var(--bone) 75%, transparent); }
+.free a, .photo-credits a { color: var(--lamp); text-underline-offset: 0.22em; }
+
+.photo-credits {
+  margin: 2.4rem 0 0;
+  font-size: 0.8rem;
+  line-height: 1.7;
+  color: color-mix(in srgb, var(--bone) 45%, transparent);
+}
+
+@media (max-width: 720px) {
+  .read-inner { text-align: center; }
+  .read-body { text-align: left; }
+}
