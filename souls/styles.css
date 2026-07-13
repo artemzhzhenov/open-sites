@@ -1,0 +1,377 @@
+/* RAYDIZHE — What Our Souls Are Made Of
+ *
+ * Правило, которое держит всё: печатное — это роман, рукописное — это живой
+ * человек. Печатью набраны Бронте и текст пролога; рукой, вереском, написано
+ * всё человеческое — подчёркивание, пометки на полях, стрелка к кнопке.
+ *
+ * Бумага холодная и отсыревшая, не уютно-кремовая: книга у окна под дождём.
+ */
+
+/* ── Шрифты ─────────────────────────────────────────────────────────────── */
+@font-face {
+  font-family: "EB Garamond"; font-style: normal; font-weight: 400; font-display: swap;
+  src: url(assets/fonts/garamond-400.woff2) format("woff2");
+}
+@font-face {
+  font-family: "EB Garamond"; font-style: italic; font-weight: 400; font-display: swap;
+  src: url(assets/fonts/garamond-400i.woff2) format("woff2");
+}
+@font-face {
+  font-family: "EB Garamond"; font-style: normal; font-weight: 500; font-display: swap;
+  src: url(assets/fonts/garamond-500.woff2) format("woff2");
+}
+@font-face {
+  font-family: "Instrument Serif"; font-style: normal; font-weight: 400; font-display: swap;
+  src: url(assets/fonts/instrument-400.woff2) format("woff2");
+}
+@font-face {
+  font-family: "Instrument Serif"; font-style: italic; font-weight: 400; font-display: swap;
+  src: url(assets/fonts/instrument-400i.woff2) format("woff2");
+}
+@font-face {
+  font-family: Caveat; font-style: normal; font-weight: 500; font-display: swap;
+  src: url(assets/fonts/caveat-500.woff2) format("woff2");
+}
+
+/* ── Токены ─────────────────────────────────────────────────────────────── */
+:root {
+  --paper: #edeae2;
+  --ink: #1a1917;
+  --heather: #7a4257;   /* вереск пустошей и след на коже — единственный цвет */
+  --shade: #e4e0d6;
+
+  --print: "EB Garamond", Georgia, serif;
+  --display: "Instrument Serif", Georgia, serif;
+  --hand: Caveat, cursive;
+
+  --body: clamp(1.1rem, 1rem + 0.5vw, 1.3rem);
+  --quote: clamp(1.6rem, 1.1rem + 2.6vw, 2.9rem);
+  --title: clamp(2.4rem, 1.4rem + 5vw, 5.4rem);
+  --hand-size: clamp(1.35rem, 1.1rem + 1.2vw, 1.9rem);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--print);
+  font-size: var(--body);
+  line-height: 1.62;
+  /* Волокно бумаги: едва различимый шум, чтобы фон не был стерильной заливкой */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+}
+
+:focus-visible {
+  outline: 2px solid var(--heather);
+  outline-offset: 4px;
+}
+
+.skip {
+  position: absolute;
+  left: -200vw;
+  top: 0;
+  padding: 0.5rem 1rem;
+  background: var(--ink);
+  color: var(--paper);
+}
+.skip:focus-visible { left: 1rem; top: 1rem; z-index: 10; }
+
+/* ── Каркас страницы: широкое поле слева, печатная колонка справа ───────── */
+.page {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(2.5rem, 1fr) minmax(0, 44rem) minmax(2.5rem, 2fr);
+  padding-block: clamp(5rem, 14vh, 10rem);
+}
+
+.page .col {
+  grid-column: 2;
+  max-width: 66ch;
+}
+
+/* ── Рука: всё человеческое — вереском ──────────────────────────────────── */
+.margin-note {
+  position: absolute;
+  left: clamp(0.6rem, 2vw, 2.4rem);
+  top: clamp(4rem, 12vh, 8rem);
+  max-width: 11rem;
+  margin: 0;
+  font-family: var(--hand);
+  font-size: var(--hand-size);
+  line-height: 1.15;
+  color: var(--heather);
+  transform: rotate(-4deg);
+}
+
+/* Рукописное подчёркивание: неровный штрих, а не ровная линия */
+.hand-underline {
+  background: none;
+  color: inherit;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 8' preserveAspectRatio='none'%3E%3Cpath d='M2 5.5 C 20 3.5, 38 6.5, 58 5 S 100 3, 118 5.8' fill='none' stroke='%237a4257' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 100% 0.42em;
+  padding-bottom: 0.18em;
+}
+
+/* ── 1 · Титул ──────────────────────────────────────────────────────────── */
+#epigraph { min-height: 92svh; align-content: center; }
+
+.epigraph-quote { margin: 0; }
+.epigraph-quote p {
+  margin: 0;
+  font-family: var(--print);
+  font-style: italic;
+  font-size: var(--quote);
+  line-height: 1.32;
+  text-wrap: balance;
+}
+.epigraph-quote footer {
+  margin-top: 1.1em;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  color: color-mix(in srgb, var(--ink) 62%, var(--paper));
+}
+.epigraph-quote cite { font-style: italic; }
+
+.book-title {
+  margin: clamp(2.5rem, 8vh, 5rem) 0 0;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: var(--title);
+  line-height: 1.02;
+  letter-spacing: 0.005em;
+  text-wrap: balance;
+}
+
+.byline {
+  margin: 0.9em 0 0;
+  font-size: 1rem;
+  letter-spacing: 0.14em;
+  text-transform: lowercase;
+  color: color-mix(in srgb, var(--ink) 62%, var(--paper));
+}
+
+/* ── 2 · Чистая страница и водяные знаки ────────────────────────────────── */
+#blank-page { overflow: hidden; min-height: 130svh; align-content: center; }
+
+.watermarks {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Водяной знак — не цвет, а величина: те же чернила на грани видимости.
+   Свет (main.js) поднимает --wm-lit; без JS и при reduced-motion знак
+   просто виден на своей прозрачности. */
+.wm {
+  --wm-lit: 0;
+  position: absolute;
+  margin: 0;
+  max-width: 28ch;
+  font-family: var(--print);
+  font-style: italic;
+  font-size: clamp(1.5rem, 1rem + 2.4vw, 2.7rem);
+  line-height: 1.25;
+  color: var(--ink);
+  opacity: calc(0.07 + var(--wm-lit) * 0.5);
+  will-change: opacity;
+}
+/* Знаки живут на полях и в пустоте под текстом — печатной колонке они не
+   мешают: прошлое проступает рядом с текстом, а не сквозь него. */
+.wm:nth-child(1) { top: 4%;  right: 3%;   transform: rotate(1.5deg); }
+.wm:nth-child(2) { top: 46%; right: 6%;   transform: rotate(-2deg); max-width: 15ch; }
+.wm:nth-child(3) { bottom: 4%; right: 14%; transform: rotate(1deg); max-width: 18ch; }
+.wm:nth-child(4) { bottom: 3%; left: 4%;  transform: rotate(-1deg); max-width: 22ch; font-size: clamp(1.2rem, 0.9rem + 1.6vw, 1.9rem); }
+
+.prose p { margin: 0 0 1.1em; }
+.prose .from {
+  margin-top: 2.2em;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  color: color-mix(in srgb, var(--ink) 62%, var(--paper));
+}
+
+#blank-page .prose { position: relative; }
+
+/* ── 3 · Двое: разница набрана, а не нарисована ─────────────────────────── */
+.person { margin-bottom: clamp(2.5rem, 7vh, 4.5rem); }
+.person h2 {
+  margin: 0 0 0.35em;
+  font-weight: 400;
+  font-size: clamp(1.9rem, 1.3rem + 2.6vw, 3.2rem);
+  line-height: 1.05;
+}
+.person p { margin: 0; max-width: 52ch; }
+
+/* Тесса — необработанная: печатная антиква, неровный левый край, без маски */
+.person-tessa h2 {
+  font-family: var(--print);
+  font-weight: 500;
+}
+.person-tessa p { text-indent: 1.2em; }
+
+/* Итан — безупречный: холодный дисплей, идеальная выключка, ни волоска мимо */
+.person-ethan h2 {
+  font-family: var(--display);
+  letter-spacing: 0.05em;
+}
+.person-ethan p { border-left: 1px solid color-mix(in srgb, var(--ink) 30%, var(--paper)); padding-left: 1.2em; }
+
+.margin-note-two { top: auto; bottom: 14%; }
+
+/* ── 4 · Голос ──────────────────────────────────────────────────────────── */
+#voice { background: var(--shade); }
+
+.scene-set {
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  color: color-mix(in srgb, var(--ink) 62%, var(--paper));
+  margin-bottom: 2.4em !important;
+}
+
+.voice-prose .beat { margin-left: 1.6em; margin-bottom: 0.35em; }
+.voice-prose .spoken {
+  font-size: 1.35em;
+  font-style: italic;
+  margin-block: 1.2em;
+}
+
+/* Последнее слово пролога — единственное место, где роман переходит на руку:
+   шёпот, который решает всё. */
+.stay {
+  font-family: var(--hand);
+  font-size: clamp(2.6rem, 2rem + 3vw, 4.2rem);
+  color: var(--heather);
+  transform: rotate(-3deg);
+  margin-block: 0.4em !important;
+}
+
+.dateline {
+  margin-top: 3em !important;
+  font-size: 0.95rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--ink) 62%, var(--paper));
+}
+
+/* ── 5 · Автор ──────────────────────────────────────────────────────────── */
+.quiet-heading {
+  margin: 0 0 0.8em;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(1.7rem, 1.2rem + 2vw, 2.6rem);
+}
+.prose-p { margin: 0 0 1em; max-width: 54ch; }
+.author-link a {
+  color: var(--heather);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+}
+
+/* ── 6 · Читать ─────────────────────────────────────────────────────────── */
+#read { background: var(--shade); }
+
+.read-col {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+
+/* Обложка — один раз, мелко, как вещь, приколотая к странице. Тон не задаёт. */
+.cover-clip {
+  margin: 0;
+  flex: 0 0 auto;
+  transform: rotate(-2.5deg);
+  position: relative;
+}
+.cover-clip img {
+  display: block;
+  width: clamp(7rem, 16vw, 10rem);
+  height: auto;
+  box-shadow: 0 2px 14px rgb(26 25 23 / 0.18);
+}
+/* Полоска бумажного скотча поверх угла */
+.cover-clip::after {
+  content: "";
+  position: absolute;
+  top: -0.7rem;
+  left: 50%;
+  width: 4.5rem;
+  height: 1.4rem;
+  transform: translateX(-50%) rotate(3deg);
+  background: color-mix(in srgb, var(--paper) 82%, transparent);
+  border: 1px solid rgb(26 25 23 / 0.08);
+}
+
+.read-body { position: relative; flex: 1 1 16rem; }
+
+.facts {
+  margin: 0 0 1.6em;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  color: color-mix(in srgb, var(--ink) 62%, var(--paper));
+}
+
+.margin-note-cta {
+  position: static;
+  display: block;
+  margin: 0 0 0.4rem;
+  transform: rotate(-3deg);
+  max-width: none;
+}
+
+/* Кнопка — тонкая обводка чернилами, не заливка: действие, а не баннер */
+.cta {
+  display: inline-block;
+  padding: 0.85em 1.9em;
+  border: 1.5px solid var(--ink);
+  border-radius: 2px;
+  font-family: var(--print);
+  font-weight: 500;
+  font-size: 1.15rem;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  text-decoration: none;
+  background: var(--paper);
+}
+.cta:hover { background: var(--ink); color: var(--paper); }
+
+.free {
+  margin: 1.2em 0 0;
+  font-size: 0.95rem;
+  color: color-mix(in srgb, var(--ink) 62%, var(--paper));
+}
+
+/* ── Свет (создаётся в main.js; без JS его нет и не нужно) ──────────────── */
+.lightbar {
+  position: absolute;
+  inset-inline: 0;
+  height: 46vh;
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent, rgb(255 253 246 / 0.9), transparent);
+  mix-blend-mode: soft-light;
+  will-change: transform;
+}
+
+/* ── Телефон ────────────────────────────────────────────────────────────── */
+@media (max-width: 720px) {
+  .page { grid-template-columns: 1.25rem minmax(0, 1fr) 1.25rem; }
+  /* Рука уходит в поток, а не за экран — и в печатную колонку, а не в узкое
+     поле, где она легла бы поверх текста */
+  .margin-note {
+    position: static;
+    grid-column: 2;
+    display: block;
+    max-width: none;
+    margin-bottom: 1.2rem;
+    transform: rotate(-2deg);
+  }
+  .wm { font-size: 1.35rem; }
+}
